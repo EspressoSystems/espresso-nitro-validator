@@ -9,21 +9,6 @@ import {CborElement, LibCborElement} from "../src/CborDecode.sol";
 import {LibBytes} from "../src/LibBytes.sol";
 import {EspressoValidator} from "../src/EspressoValidator.sol";
 
-// contract Bytes32ToString {
-//     function bytes32ToHexString(bytes32 _bytes32) public pure returns (string memory) {
-//         bytes memory hexString = new bytes(64);  // 2 hex chars per byte, 32 bytes = 64 chars
-//         bytes32 alphabet = 0x303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f;
-
-//         for (uint256 i = 0; i < 32; i++) {
-//             uint8 byteVal = uint8(_bytes32[i]);
-//             hexString[i*2] = bytes1(alphabet[byteVal >> 4]);      // High nibble
-//             hexString[i*2 + 1] = bytes1(alphabet[byteVal & 0x0f]);  // Low nibble
-//         }
-
-//         return string(hexString);
-//     }
-// }
-
 contract NitroValidatorTest is Test {
     NitroValidator public validator;
 
@@ -73,7 +58,6 @@ contract NitroValidatorTest is Test {
         }
 
         bytes32 pcr0 = LibBytes.keccak(attestationTbs, ptr_start, ptr_length);
-        // Bytes32ToString converter = new Bytes32ToString();
         console.log("pcr0 at the end of test_MyDecodeAttestationTbs() = ");
         console.logBytes32(pcr0);  // Logs the value during the test
     }
