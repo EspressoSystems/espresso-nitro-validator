@@ -251,12 +251,7 @@ library Asn1Decode {
         uint256 minute,
         uint256 second
     ) private pure returns (uint256) {
-        require(year >= 1970);
-        require(1 <= month && month <= 12);
-        require(1 <= day && day <= 31);
-        require(hour <= 23);
-        require(minute <= 59);
-        require(second <= 59);
+         _verifyTimestampFromDateTime(year, month, day, hour, minute, second);
 
         int256 _year = int256(year);
         int256 _month = int256(month);
@@ -267,5 +262,22 @@ library Asn1Decode {
             - 2440588;
 
         return ((uint256(_days) * 24 + hour) * 60 + minute) * 60 + second;
+    }
+
+    // check timestamp validity
+    function _verifyTimestampFromDateTime(
+        uint256 year,
+        uint256 month,
+        uint256 day,
+        uint256 hour,
+        uint256 minute,
+        uint256 second
+    ) private pure {
+        require(year >= 1970);
+        require(1 <= month && month <= 12);
+        require(1 <= day && day <= 31);
+        require(hour <= 23);
+        require(minute <= 59);
+        require(second <= 59);
     }
 }
