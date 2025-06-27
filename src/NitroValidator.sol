@@ -152,7 +152,8 @@ contract NitroValidator {
 
         Ptrs memory ptrs;
         uint256 end = payload.end();
-        while (current.end() < end) {
+        // 0xFF is end of array for indefinite items
+        while (current.end() < end && uint8(attestationTbs[current.end()]) != 0xFF) {
             current = attestationTbs.nextTextString(current);
             bytes32 keyHash = attestationTbs.keccak(current);
             if (keyHash == MODULE_ID_KEY) {

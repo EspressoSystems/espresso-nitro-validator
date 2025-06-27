@@ -251,7 +251,7 @@ library Asn1Decode {
         uint256 minute,
         uint256 second
     ) private pure returns (uint256) {
-         _verifyTimestampFromDateTime(year, month, day, hour, minute, second);
+        _verifyTimestampFromDateTime(year, month, day, hour, minute, second);
 
         int256 _year = int256(year);
         int256 _month = int256(month);

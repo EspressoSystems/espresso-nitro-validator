@@ -109,7 +109,14 @@ library CborDecode {
             // retain the additional information:
             return LibCborElement.toCborElement(_type | ai, ix + 1, 0);
         }
+
         require(_type == expectedType, "unexpected type");
+        if (ai == 31) {
+            // Handle indefinite-length items (additional info = 31)
+            // Go to the next byte (ix + 1).
+            // Pass in 0 for indefinite length we look for 0xff in outer loop
+            return LibCborElement.toCborElement(_type | 0x1f, ix + 1, 0);
+        }
         require(ai < 28, "unsupported type");
         if (ai == 24) {
             return LibCborElement.toCborElement(_type, ix + 2, uint8(cbor[ix + 1]));
