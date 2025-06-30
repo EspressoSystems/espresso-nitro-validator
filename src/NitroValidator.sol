@@ -151,8 +151,10 @@ contract NitroValidator {
         CborElement current = attestationTbs.mapAt(payload.start());
 
         Ptrs memory ptrs;
-        uint256 end = payload.end();
-        while (current.end() < end) {
+
+        uint256 map_length = current.value();
+
+        for (uint256 pair = 0; pair < map_length; pair++) {
             current = attestationTbs.nextTextString(current);
             bytes32 keyHash = attestationTbs.keccak(current);
             if (keyHash == MODULE_ID_KEY) {
